@@ -4,12 +4,12 @@ import { Todo } from '../interfaces/todo.interface';
 
 @Injectable()
 export class TodoService {
-	constructor(private db: AngularFirestore) {}
+	constructor(private afs: AngularFirestore) {}
 	/**
  * Funcion para cargar todas las tareas
  */
 	getTodos() {
-		return this.db.collection<Todo>('todos').valueChanges();
+		return this.afs.collection<Todo>('todos').valueChanges();
 	}
 
 	/**
@@ -17,14 +17,14 @@ export class TodoService {
 	 * @param input, input que contiene el nombre de la tarea
 	 */
 	createTodo(input: HTMLInputElement) {
-		const id = this.db.createId();
+		const id = this.afs.createId();
 		const name = input.value;
 		const todo: Todo = {
 			id,
 			name,
 			completed: false
 		};
-		this.db.collection<Todo>('todos').doc(id).set(todo);
+		this.afs.collection<Todo>('todos').doc(id).set(todo);
 		input.value = '';
 	}
 
@@ -39,7 +39,7 @@ export class TodoService {
 		} else {
 			todo.completed = false;
 		}
-		this.db.collection<Todo>('todos').doc(todo.id).update(todo);
+		this.afs.collection<Todo>('todos').doc(todo.id).update(todo);
 	}
 
 	/**
@@ -47,7 +47,7 @@ export class TodoService {
 	 * @param todo, tarea que se va a eliminar
 	 */
 	removeTodo(todo: Todo) {
-		this.db.collection<Todo>('todos').doc(todo.id).delete();
+		this.afs.collection<Todo>('todos').doc(todo.id).delete();
 	}
 
 	/**
@@ -63,7 +63,7 @@ export class TodoService {
 	 * Funcion para cargar las tareas completadas
 	 */
 	getTodosCompleted() {
-		return this.db
+		return this.afs
 			.collection<Todo>('todos', (ref) => ref.where('completed', '==', true))
 			.valueChanges();
 	}
@@ -72,7 +72,7 @@ export class TodoService {
 	 * Funcion para cargar las tareas activas
 	 */
 	getTodosActive() {
-		return this.db
+		return this.afs
 			.collection<Todo>('todos', (ref) => ref.where('completed', '==', false))
 			.valueChanges();
 	}
