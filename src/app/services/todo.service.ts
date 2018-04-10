@@ -54,8 +54,8 @@ export class TodoService {
 	 * Funcion para eliminar las tareas completadas
 	 */
 	removeTodosCompleted(todos: Todo[]) {
-		todos.map((element) => {
-			this.removeTodo(element);
+		todos.map((todo) => {
+			this.removeTodo(todo);
 		});
 	}
 
@@ -75,5 +75,16 @@ export class TodoService {
 		return this.afs
 			.collection<Todo>('todos', (ref) => ref.where('completed', '==', false))
 			.valueChanges();
+	}
+	/**
+	 * Funcion para checkear todas las tareas
+	 * @param event, evento que ocurre cuando checkeamos o descheckeamos el checkbox para completar todas
+	 * las tareas
+	 *@param todos, lista de todas las tareas que se van a completar o a activar
+	 */
+	checkAllTodos(event, todos: Todo[]) {
+		todos.map((todo) => {
+			this.chageStatusTodo(event, todo);
+		});
 	}
 }

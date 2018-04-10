@@ -87,4 +87,12 @@ export class AppComponent {
 	removeTodosCompleted() {
 		this.todoService.removeTodosCompleted(this.todosCompleted);
 	}
+
+	/**
+	 * Funcion para checkear todas las tareas
+	 * @param event, evento que ocurre cuando checkeamos o descheckeamos el checkbox para completar todas las tareas
+	 */
+	checkAllTodos(event) {
+		this.todoService.checkAllTodos(event, this.todos);
+	}
 }

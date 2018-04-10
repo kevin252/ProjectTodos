@@ -11,7 +11,8 @@ export class TodoComponent implements OnInit {
 	@Output() actived = new EventEmitter();
 	@Output() completed = new EventEmitter();
 	@Output() clearCompleted = new EventEmitter();
-	@Input() lengthTodos;
+	@Input() lengthTodosActive;
+	@Input() lengthTodosCompleted;
 	filter = Filter;
 	constructor() {}
 	showAll() {

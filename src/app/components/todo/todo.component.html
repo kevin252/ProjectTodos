@@ -1,8 +1,8 @@
 <div>
-    <label *ngIf="lengthTodos">{{lengthTodos}} items no left</label>
-    <button (click)=showAll()>All</button>
-    <button (click)=showActived()>Active</button>
-    <button (click)=showCompleted()>completed</button>
-    <button (click)=clear()>Clear completed</button>
+    <label >{{lengthTodosActive}} items left</label>
+    <button (click)=showAll() class="btn-filters" >All</button>
+    <button (click)=showActived() class="btn-filters" >Active</button>
+    <button (click)=showCompleted() class="btn-filters" >completed</button>
+    <button *ngIf="lengthTodosCompleted" (click)=clear() class="btn-clear-completed" >Clear completed</button>
 </div>
 
