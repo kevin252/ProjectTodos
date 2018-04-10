@@ -1,0 +1,87 @@
+<div>
+    <input type="text"
+           name=""
+           id=""
+           (keydown.enter)="createToDo($event.target)"
+           placeholder="Ingresar Tarea">
+</div>
+<div [ngSwitch]="filter">
+    <!-- All Todos -->
+    <div *ngSwitchCase="1">
+        <div *ngFor="let to_do of todos">
+            <div [ngSwitch]="to_do.completed">
+                <div *ngSwitchCase="false">
+                    <input type="checkbox"
+                           (change)="changeStatusTodo($event,to_do)">
+                    <label>  {{to_do.name}}  </label>
+                    <button (click)="removeTodo(to_do)">X</button>
+                </div>
+
+                <div *ngSwitchCase="true">
+                    <input type="checkbox"
+                           (change)="changeStatusTodo($event,to_do)"
+                           checked>
+                    <label> <del>{{to_do.name}} </del>  </label>
+                    <button (click)="removeTodo(to_do)">X</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Todos Active -->
+    <div *ngSwitchCase="2">
+        <div *ngFor="let to_do of todosActive">
+            <div [ngSwitch]="to_do.completed">
+                <div *ngSwitchCase="false">
+                    <input type="checkbox"
+                           (change)="changeStatusTodo($event,to_do)">
+                    <label>  {{to_do.name}}  </label>
+                    <button (click)="removeTodo(to_do)">X</button>
+                </div>
+
+                <div *ngSwitchCase="true">
+                    <input type="checkbox"
+                           (change)="changeStatusTodo($event,to_do)"
+                           checked>
+                    <label> <del>{{to_do.name}} </del>  </label>
+                    <button (click)="removeTodo(to_do)">X</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Todos Completed -->
+    <div *ngSwitchCase="3">
+        <div *ngFor="let to_do of todosCompleted">
+            <div [ngSwitch]="to_do.completed">
+                <div *ngSwitchCase="false">
+                    <input type="checkbox"
+                           (change)="changeStatusTodo($event,to_do)">
+                    <label>  {{to_do.name}}  </label>
+                    <button (click)="removeTodo(to_do)">X</button>
+                </div>
+
+                <div *ngSwitchCase="true">
+                    <input type="checkbox"
+                           (change)="changeStatusTodo($event,to_do)"
+                           checked>
+                    <label> <del>{{to_do.name}} </del>  </label>
+                    <button (click)="removeTodo(to_do)">X</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Todo Component -->
+    <app-todo (completed)="show($event)"
+              (all)="show($event)"
+              (actived)="show($event)"
+              (clearCompleted)="removeTodosCompleted()"
+              [lengthTodos]="todosActive.length"></app-todo>
+</div>
